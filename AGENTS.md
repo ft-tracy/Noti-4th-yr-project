@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- The landing page lives in src/components/landing, one file per section, composed in src/routes/index.tsx — mirrors the original Noti source layout.

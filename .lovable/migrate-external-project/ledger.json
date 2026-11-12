@@ -1,0 +1,8 @@
+[
+ {"capability":"code","source":"noti-app (recovered from git history; working files absent in archive)","outcome":"migrate","status":"done","next_action":"none"},
+ {"capability":"landing page","source":"src/components/landing/*","outcome":"migrate","status":"done","next_action":"none"},
+ {"capability":"theme","source":"undefined tokens (gradient-warm, font-display)","outcome":"recreated","status":"done","next_action":"none"},
+ {"capability":"auth, dashboards, schema","source":"referenced in .github agent doc only; no code in archive","outcome":"pending","status":"blocked","next_action":"user to supply newer code or ask to build"},
+ {"capability":"records/users","source":"Supabase (per docs)","outcome":"pending","status":"blocked","next_action":"user export if a live database exists"},
+ {"capability":"ci workflow","source":".github/workflows/ci.yml","outcome":"dropped","status":"accepted","next_action":"Lovable builds automatically"}
+]
