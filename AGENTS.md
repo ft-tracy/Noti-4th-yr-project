@@ -30,3 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 - The landing page lives in src/components/landing, one file per section, composed in src/routes/index.tsx — mirrors the original Noti source layout.
+- Domain logic lives in src/lib/noti (types, Zod validation, service rules, auth); UI only calls service functions through useNoti().run — keeps rules testable and the storage layer swappable.
+- Every service function takes the acting user and enforces role/relationship access itself, mirroring future RLS policies — tests in src/test/security.test.ts must keep passing.
+- Data is browser-only (localStorage) until a server database is chosen; no platform-specific SDKs or branding in code or UI so the project can be hosted independently.

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Bell } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function Nav() {
   return (
@@ -17,8 +18,8 @@ export function Nav() {
           <a href="#workflow" className="hover:text-foreground transition">How it works</a>
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm">Sign in</Button>
-          <Button size="sm" className="rounded-full">Get started</Button>
+          <Button variant="ghost" size="sm" asChild><Link to="/login">Sign in</Link></Button>
+          <Button size="sm" className="rounded-full" asChild><Link to="/signup">Get started</Link></Button>
         </div>
       </div>
     </header>

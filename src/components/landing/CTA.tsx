@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function CTA() {
   return (
@@ -13,11 +14,11 @@ export function CTA() {
             learning environments their families love.
           </p>
           <div className="relative flex items-center justify-center gap-3">
-            <Button size="lg" variant="secondary" className="rounded-full h-12 px-7 text-base">
-              Get started free <ArrowRight className="w-4 h-4" />
+            <Button size="lg" variant="secondary" className="rounded-full h-12 px-7 text-base" asChild>
+              <Link to="/signup">Get started free <ArrowRight className="w-4 h-4" /></Link>
             </Button>
-            <Button size="lg" variant="ghost" className="rounded-full h-12 px-6 text-base text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-              Talk to us
+            <Button size="lg" variant="ghost" className="rounded-full h-12 px-6 text-base text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" asChild>
+              <Link to="/login">Sign in</Link>
             </Button>
           </div>
         </div>

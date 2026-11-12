@@ -44,6 +44,25 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// OWASP-recommended response headers, applied to every production response.
+const SECURITY_HEADERS: Record<string, string> = {
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Content-Security-Policy":
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+};
+
+export function withSecurityHeaders(response: Response): Response {
+  if (!import.meta.env.PROD) return response;
+  const res = new Response(response.body, response);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) res.headers.set(k, v);
+  return res;
+}
+
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
@@ -52,7 +71,7 @@ export default {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return new Response(renderErrorPage(), {
